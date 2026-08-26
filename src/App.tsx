@@ -146,28 +146,28 @@ export default function App() {
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-lg sm:text-xl font-bold tracking-tight text-white font-hindi">
-                  बस वाले की प्लेलिस्ट
+                <h1 className="text-lg sm:text-xl font-bold tracking-tight text-white font-mono">
+                  BUS WALE KI PLAYLIST
                 </h1>
                 <span className="px-2.5 py-0.5 rounded-full bg-[#ff7b00]/15 text-[#ff9500] text-[10px] font-mono border border-[#ff7b00]/30 uppercase tracking-wider">
                   90s Highway Mixtape
                 </span>
               </div>
               <p className="text-xs text-neutral-400 truncate max-w-xs sm:max-w-md font-body">
-                A midnight journey through 90s Bollywood cassettes & dhaba halts
+                A midnight journey through 90s Bollywood cassettes & highway dhaba halts
               </p>
             </div>
           </div>
 
           {/* Slogan Banner & Quick Key Hints */}
           <div className="hidden md:flex items-center gap-3">
-            <div className="px-3.5 py-1.5 rounded-xl bg-[#141e33]/90 border border-white/10 text-xs font-hindi text-[#ff9500] shadow-sm">
+            <div className="px-3.5 py-1.5 rounded-xl bg-[#141e33]/90 border border-white/10 text-xs font-mono text-[#ff9500] shadow-sm">
               {TRUCK_ART_SLOGANS[truckSloganIndex]}
             </div>
 
             <div className="flex items-center gap-1.5 text-[11px] font-mono text-neutral-300 bg-[#141e33]/90 px-3 py-1.5 rounded-xl border border-white/10">
               <kbd className="px-1.5 py-0.5 rounded bg-neutral-800 text-[#ff9500] font-bold border border-neutral-700">H</kbd>
-              <span>Honk</span>
+              <span>Highway Horn</span>
               <span className="text-neutral-500">•</span>
               <kbd className="px-1.5 py-0.5 rounded bg-neutral-800 text-[#ff9500] font-bold border border-neutral-700">W</kbd>
               <span>Whistle</span>
@@ -185,12 +185,12 @@ export default function App() {
             <span className="tracking-wider">NH-44 NIGHT EXPRESS • DELHI ➔ MANALI • 01:30 AM</span>
           </div>
 
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-hindi drop-shadow-md">
-            बस वाले भइया का <span className="text-[#ff9500] text-glow-orange font-devanagari">टेप रिकॉर्डर</span>
+          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white font-serif drop-shadow-md">
+            The Bus Driver's <span className="text-[#ff9500] text-glow-orange">Tape Deck</span>
           </h2>
 
           <p className="text-sm sm:text-base text-neutral-300 max-w-2xl mx-auto font-baskerville italic leading-relaxed">
-            "Window seat par sar tikaaye, thandi pahadi hawa, baarish ki boondein, aur front speakers se goonjti Kumar Sanu aur Alka Yagnik ki timeless aawaz."
+            "Head rested against the cool window pane, mountain breeze streaming in, rain droplets gliding across the glass, and nostalgic melodies echoing through the cabin speakers."
           </p>
         </section>
 

@@ -2,5 +2,7 @@
   "name": "Bus Wale Ki Playlist",
   "description": "A deeply nostalgic interactive tribute to late-night Indian highway bus journeys with vintage cassette deck music player, rain wiper physics, musical air horn, and ambient highway soundscapes.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

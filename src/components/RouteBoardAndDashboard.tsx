@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { Volume2, BellRing, Compass, Gauge, Flame, Sparkles, Navigation } from 'lucide-react';
+import { Volume2, BellRing, Gauge, Flame, Sparkles, Navigation, Music4, Zap } from 'lucide-react';
 import { busAudio } from '../utils/audioSynthesizer';
 import { HangingTalisman } from './HangingTalisman';
+import { HornStyle } from '../types';
 
 interface RouteBoardAndDashboardProps {
   speedKmH: number;
@@ -19,8 +20,22 @@ export const RouteBoardAndDashboard: React.FC<RouteBoardAndDashboardProps> = ({
   onWhistle,
   hornActive,
 }) => {
+  const [selectedHornStyle, setSelectedHornStyle] = useState<HornStyle>('musical');
+  const [lastHonkedStyle, setLastHonkedStyle] = useState<string>('Musical Horn (Poo-Poo-Peee-Poo)');
+
   // Speedometer needle rotation angle (-120 deg for 0 km/h to +120 deg for 140 km/h)
   const needleRotation = -120 + (speedKmH / 140) * 240;
+
+  const handleHitHorn = (style?: HornStyle) => {
+    const targetStyle = style || selectedHornStyle;
+    busAudio.unlock();
+    busAudio.playHorn(targetStyle);
+    if (targetStyle === 'musical') setLastHonkedStyle('Musical 4-Tone Air Horn');
+    else if (targetStyle === 'heavy') setLastHonkedStyle('Heavy Pneumatic Truck Blast');
+    else if (targetStyle === 'fanfare') setLastHonkedStyle('Overtaking Fanfare Melody');
+    else if (targetStyle === 'staccato') setLastHonkedStyle('Rapid Double Honk');
+    onHorn();
+  };
 
   return (
     <div className="w-full relative mt-4">
@@ -41,13 +56,13 @@ export const RouteBoardAndDashboard: React.FC<RouteBoardAndDashboardProps> = ({
             </div>
           </div>
 
-          {/* Scrolling Destination Name in Hindi & English */}
+          {/* Scrolling Destination Name in English */}
           <div className="text-center">
-            <div className="text-xl sm:text-2xl font-bold tracking-wide text-[#ff9500] font-hindi drop-shadow-[0_0_12px_rgba(255,123,0,0.5)]">
-              दिल्ली ➔ चंडीगढ़ ➔ कुल्लू ➔ मनाली
+            <div className="text-xl sm:text-2xl font-bold tracking-wide text-[#ff9500] font-mono drop-shadow-[0_0_12px_rgba(255,123,0,0.5)]">
+              DELHI ➔ CHANDIGARH ➔ KULLU ➔ MANALI
             </div>
             <div className="text-xs text-neutral-400 font-mono tracking-widest uppercase">
-              DELHI ISBT ➔ CHANDIGARH ➔ MANALI (VIA NH 44)
+              INTERSTATE HIGHWAY NIGHT SERVICE • VIA NH-44 GT ROAD
             </div>
           </div>
 
@@ -81,9 +96,9 @@ export const RouteBoardAndDashboard: React.FC<RouteBoardAndDashboardProps> = ({
         </div>
 
         {/* Dashboard Controls Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center pt-8 sm:pt-4">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-center pt-8 sm:pt-4">
           {/* 1. SPEEDOMETER & ODOMETER GAUGE */}
-          <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#0a0f1a]/90 border border-white/10 shadow-inner">
+          <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-[#0a0f1a]/90 border border-white/10 shadow-inner">
             <div className="text-xs font-bold text-neutral-300 font-mono uppercase tracking-wider mb-1 flex items-center gap-1.5">
               <Gauge className="w-3.5 h-3.5 text-[#ff7b00]" />
               <span>Vintage Speedometer</span>
@@ -136,7 +151,7 @@ export const RouteBoardAndDashboard: React.FC<RouteBoardAndDashboardProps> = ({
 
             {/* Accelerator Cruise Slider */}
             <div className="w-full mt-2 flex items-center gap-2">
-              <span className="text-[10px] text-neutral-400 font-mono">40</span>
+              <span className="text-[10px] text-neutral-400 font-mono">30</span>
               <input
                 id="speed-slider"
                 type="range"
@@ -148,10 +163,13 @@ export const RouteBoardAndDashboard: React.FC<RouteBoardAndDashboardProps> = ({
               />
               <span className="text-[10px] text-neutral-400 font-mono">110</span>
             </div>
+            <div className="text-[10px] text-neutral-500 font-mono mt-1">
+              Highway Throttle Speed Control
+            </div>
           </div>
 
           {/* 2. THE SACRED DASHBOARD IDOL & DIYA */}
-          <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#0a0f1a]/90 border border-white/10 text-center relative overflow-hidden">
+          <div className="flex flex-col items-center justify-center p-4 rounded-2xl bg-[#0a0f1a]/90 border border-white/10 text-center relative overflow-hidden">
             {/* Small Marigold Garland SVG */}
             <div className="flex items-center gap-1 mb-1">
               {[...Array(6)].map((_, i) => (
@@ -159,10 +177,9 @@ export const RouteBoardAndDashboard: React.FC<RouteBoardAndDashboardProps> = ({
               ))}
             </div>
 
-            {/* Mini Dashboard Idol (Hanumanji / Ganesh ji silhouette with warm golden halo) */}
+            {/* Mini Dashboard Shrine with warm golden halo */}
             <div className="relative my-1">
               <div className="w-16 h-16 rounded-full bg-gradient-to-b from-[#ff7b00]/25 to-transparent flex items-center justify-center border border-[#ff7b00]/40 shadow-[0_0_20px_rgba(255,123,0,0.25)]">
-                {/* Spiritual Icon */}
                 <div className="text-3xl select-none filter drop-shadow">
                   🪔
                 </div>
@@ -173,53 +190,132 @@ export const RouteBoardAndDashboard: React.FC<RouteBoardAndDashboardProps> = ({
               </div>
             </div>
 
-            <div className="text-xs font-bold text-[#ff9500] font-hindi mt-1">
-              ॥ श्री गणेशाय नमः • जय बजरंग बली ॥
+            <div className="text-xs font-bold text-[#ff9500] font-mono mt-1 uppercase tracking-wider">
+              SACRED DASHBOARD SHRINE
             </div>
-            <div className="text-[10px] text-neutral-400 italic font-baskerville">
-              "शुभ यात्रा • माँ का आशीर्वाद"
+            <div className="text-[11px] text-neutral-300 font-baskerville italic mt-0.5">
+              "Safe Highway Journey • Mother's Blessings"
             </div>
 
             {/* Agarbatti Smoke particle text */}
-            <div className="mt-2 text-[10px] text-[#ff9500]/80 font-mono flex items-center gap-1">
+            <div className="mt-2 text-[10px] text-[#ff9500]/90 font-mono flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-[#ff7b00]" />
-              <span>Chandan Agarbatti Fragrance in the cabin</span>
+              <span>Sandalwood & Jasmine incense in cabin</span>
             </div>
           </div>
 
           {/* 3. AIR HORN (भोंपू) & CONDUCTOR WHISTLE (सीटी) INTERACTION */}
-          <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-[#0a0f1a]/90 border border-white/10 gap-3">
-            <div className="text-xs font-bold text-neutral-300 font-mono uppercase tracking-wider">
-              Interactive Highway Controls
+          <div className="flex flex-col p-4 rounded-2xl bg-[#0a0f1a]/90 border border-white/10 gap-3">
+            <div className="flex items-center justify-between">
+              <div className="text-xs font-bold text-neutral-200 font-mono uppercase tracking-wider flex items-center gap-1.5">
+                <Volume2 className="w-4 h-4 text-[#ff9500]" />
+                <span>Highway Bus Horn Console</span>
+              </div>
+              <span className="text-[10px] font-mono text-[#ff9500] bg-[#ff7b00]/15 px-2 py-0.5 rounded-md border border-[#ff7b00]/30">
+                HOTKEY: [H]
+              </span>
             </div>
 
-            {/* Giant Musical Air Horn Button */}
+            {/* Big Prominent Highway Air Horn HIT Button */}
             <motion.button
               id="musical-air-horn-btn"
-              whileTap={{ scale: 0.92 }}
-              onClick={onHorn}
-              className={`w-full py-3 px-4 rounded-xl font-bold flex items-center justify-center gap-2.5 transition-all shadow-lg border relative overflow-hidden ${
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.94 }}
+              onClick={() => handleHitHorn()}
+              className={`w-full py-3.5 px-4 rounded-2xl font-bold flex items-center justify-center gap-3 transition-all shadow-xl border relative overflow-hidden ${
                 hornActive
-                  ? 'bg-[#ff9500] text-neutral-950 border-amber-300 shadow-[0_0_35px_rgba(255,149,0,0.85)] scale-105'
-                  : 'bg-gradient-to-r from-[#ff7b00] to-[#ff9500] text-neutral-950 border-[#ff7b00] hover:brightness-110 shadow-[0_0_20px_rgba(255,123,0,0.3)]'
+                  ? 'bg-[#ff9500] text-neutral-950 border-amber-300 shadow-[0_0_40px_rgba(255,149,0,0.9)] scale-[1.03]'
+                  : 'bg-gradient-to-r from-[#ff7b00] via-[#ff8800] to-[#ff9500] text-neutral-950 border-[#ff7b00] hover:brightness-110 shadow-[0_0_25px_rgba(255,123,0,0.35)]'
               }`}
             >
-              <Volume2 className={`w-5 h-5 ${hornActive ? 'animate-spin' : ''}`} />
+              <Volume2 className={`w-6 h-6 shrink-0 ${hornActive ? 'animate-bounce' : ''}`} />
               <div className="text-left leading-tight">
-                <div className="text-sm font-black font-hindi">मल्टी-टोन एयर हॉर्न (Honk!)</div>
-                <div className="text-[10px] font-mono opacity-85">Press [H] or Tap for "Poo-Poo-Peee-Poo"</div>
+                <div className="text-sm sm:text-base font-black font-mono uppercase tracking-wide flex items-center gap-1.5">
+                  <span>PRESS / HIT BUS HORN</span>
+                  <Zap className="w-4 h-4 fill-neutral-950" />
+                </div>
+                <div className="text-[11px] font-mono opacity-90 truncate max-w-[210px] sm:max-w-none">
+                  {lastHonkedStyle}
+                </div>
               </div>
             </motion.button>
+
+            {/* 4 Horn Style Quick Presets */}
+            <div className="grid grid-cols-2 gap-1.5">
+              <button
+                id="horn-tone-musical"
+                onClick={() => {
+                  setSelectedHornStyle('musical');
+                  handleHitHorn('musical');
+                }}
+                className={`py-1.5 px-2 rounded-lg text-[10px] font-mono font-semibold transition border text-left flex items-center gap-1 ${
+                  selectedHornStyle === 'musical'
+                    ? 'bg-[#ff7b00]/25 text-[#ff9500] border-[#ff7b00]/50'
+                    : 'bg-[#141e33]/70 text-neutral-300 border-white/10 hover:bg-[#141e33]'
+                }`}
+              >
+                <span>🎺</span>
+                <span className="truncate">Musical 4-Tone</span>
+              </button>
+
+              <button
+                id="horn-tone-heavy"
+                onClick={() => {
+                  setSelectedHornStyle('heavy');
+                  handleHitHorn('heavy');
+                }}
+                className={`py-1.5 px-2 rounded-lg text-[10px] font-mono font-semibold transition border text-left flex items-center gap-1 ${
+                  selectedHornStyle === 'heavy'
+                    ? 'bg-[#ff7b00]/25 text-[#ff9500] border-[#ff7b00]/50'
+                    : 'bg-[#141e33]/70 text-neutral-300 border-white/10 hover:bg-[#141e33]'
+                }`}
+              >
+                <span>🚚</span>
+                <span className="truncate">Heavy Blast</span>
+              </button>
+
+              <button
+                id="horn-tone-fanfare"
+                onClick={() => {
+                  setSelectedHornStyle('fanfare');
+                  handleHitHorn('fanfare');
+                }}
+                className={`py-1.5 px-2 rounded-lg text-[10px] font-mono font-semibold transition border text-left flex items-center gap-1 ${
+                  selectedHornStyle === 'fanfare'
+                    ? 'bg-[#ff7b00]/25 text-[#ff9500] border-[#ff7b00]/50'
+                    : 'bg-[#141e33]/70 text-neutral-300 border-white/10 hover:bg-[#141e33]'
+                }`}
+              >
+                <span>🎶</span>
+                <span className="truncate">Fanfare Melody</span>
+              </button>
+
+              <button
+                id="horn-tone-staccato"
+                onClick={() => {
+                  setSelectedHornStyle('staccato');
+                  handleHitHorn('staccato');
+                }}
+                className={`py-1.5 px-2 rounded-lg text-[10px] font-mono font-semibold transition border text-left flex items-center gap-1 ${
+                  selectedHornStyle === 'staccato'
+                    ? 'bg-[#ff7b00]/25 text-[#ff9500] border-[#ff7b00]/50'
+                    : 'bg-[#141e33]/70 text-neutral-300 border-white/10 hover:bg-[#141e33]'
+                }`}
+              >
+                <span>⚡</span>
+                <span className="truncate">Double Tap</span>
+              </button>
+            </div>
 
             {/* Conductor Whistle Button */}
             <motion.button
               id="conductor-whistle-btn"
-              whileTap={{ scale: 0.92 }}
+              whileTap={{ scale: 0.94 }}
               onClick={onWhistle}
-              className="w-full py-2.5 px-4 rounded-xl bg-[#141e33] hover:bg-[#1e2c4a] text-neutral-200 border border-white/10 flex items-center justify-center gap-2 text-xs font-semibold font-mono transition"
+              className="w-full py-2 px-3 rounded-xl bg-[#141e33] hover:bg-[#1e2c4a] text-neutral-200 border border-white/10 flex items-center justify-center gap-2 text-xs font-semibold font-mono transition"
             >
               <BellRing className="w-4 h-4 text-emerald-400" />
-              <span>कंडक्टर की सीटी (Whistle [W])</span>
+              <span>Conductor's Whistle (Press [W])</span>
             </motion.button>
           </div>
         </div>
@@ -227,16 +323,16 @@ export const RouteBoardAndDashboard: React.FC<RouteBoardAndDashboardProps> = ({
         {/* Bottom Truck Art Slogan Ribbon */}
         <div className="mt-4 pt-3 border-t border-white/10 flex flex-wrap items-center justify-between gap-2 text-xs">
           <div className="flex items-center gap-2">
-            <span className="px-2.5 py-0.5 rounded-lg bg-red-950/70 text-red-300 font-bold border border-red-800/50 font-hindi">
+            <span className="px-2.5 py-0.5 rounded-lg bg-red-950/70 text-red-300 font-bold border border-red-800/50 font-mono">
               HORN OK PLEASE
             </span>
-            <span className="px-2.5 py-0.5 rounded-lg bg-[#ff7b00]/20 text-[#ff9500] font-bold border border-[#ff7b00]/40 font-hindi">
-              आवाज़ दे कहाँ है!
+            <span className="px-2.5 py-0.5 rounded-lg bg-[#ff7b00]/20 text-[#ff9500] font-bold border border-[#ff7b00]/40 font-mono">
+              SOUND HORN BEFORE OVERTAKING
             </span>
           </div>
 
-          <div className="text-[11px] text-neutral-400 font-hindi italic">
-            "देखो मगर प्यार से • हँसो मत पगली प्यार हो जाएगा"
+          <div className="text-[11px] text-neutral-400 font-baskerville italic">
+            "Look with love • Drive with care • Peace to all highway travelers"
           </div>
         </div>
       </div>

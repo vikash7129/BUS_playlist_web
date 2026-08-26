@@ -182,7 +182,7 @@ export const CassettePlayer: React.FC<CassettePlayerProps> = ({
                 <div className="text-xs text-neutral-400 truncate font-body">
                   {currentTrack.singers} • <span className="text-[#ff9500] font-medium">{currentTrack.movie}</span>
                 </div>
-                <div className="text-[11px] text-[#ff9500]/80 italic truncate font-hindi">
+                <div className="text-[11px] text-[#ff9500]/80 italic truncate font-baskerville">
                   {currentTrack.dialogue}
                 </div>
               </div>
@@ -328,8 +328,8 @@ export const CassettePlayer: React.FC<CassettePlayerProps> = ({
           >
             <div className="flex items-center justify-between pb-3 border-b border-white/10">
               <div>
-                <h3 className="text-lg font-bold text-[#ff9500] font-hindi flex items-center gap-2">
-                  <span>📻 बस वाले भइया की ओरिजिनल कैसेट टेप</span>
+                <h3 className="text-lg font-bold text-[#ff9500] font-mono flex items-center gap-2">
+                  <span>📻 Bus Driver's Original Cassette Tape Mixtape</span>
                 </h3>
                 <p className="text-xs text-neutral-400 font-mono">
                   Curated 90s & 2000s Bollywood Midnight Highway Mixtape

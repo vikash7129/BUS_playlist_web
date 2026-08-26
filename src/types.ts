@@ -13,10 +13,12 @@ export interface SongTrack {
 
 export type AtmosphereMode = 'midnight' | 'golden' | 'foggy';
 
+export type HornStyle = 'musical' | 'heavy' | 'fanfare' | 'staccato';
+
 export interface NostalgicMemory {
   id: string;
-  hindiTitle: string;
-  englishTranslation: string;
+  title: string;
+  subtitle: string;
   story: string;
   tag: string;
   icon: string;

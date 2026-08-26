@@ -421,11 +421,11 @@ export const WindshieldCanvas: React.FC<WindshieldCanvasProps> = ({
       ctx.fillStyle = tintGrad;
       ctx.fillRect(0, 0, w, h * 0.2);
 
-      // Top Glass Sticker: "OM SAI RAM • JAI MATA DI • BURI NAZAR WALE"
+      // Top Glass Sticker: "SAFE HIGHWAY JOURNEY • GOD BLESS OUR VOYAGE"
       ctx.fillStyle = 'rgba(254, 240, 138, 0.65)';
-      ctx.font = `600 13px 'Yatra One', cursive`;
+      ctx.font = `bold 12px 'Space Grotesk', sans-serif`;
       ctx.textAlign = 'center';
-      ctx.fillText('ॐ नमः शिवाय • जय माता दी • ॐ साईं राम', w * 0.5, 22);
+      ctx.fillText('★ SAFE HIGHWAY JOURNEY • GOD BLESS OUR VOYAGE ★', w * 0.5, 22);
 
       animationFrameId = requestAnimationFrame(render);
     };
@@ -504,9 +504,9 @@ export const WindshieldCanvas: React.FC<WindshieldCanvasProps> = ({
       </div>
 
       {/* Window Steam Hint */}
-      <div className="absolute bottom-3 left-4 text-[11px] text-neutral-400/90 pointer-events-none flex items-center gap-1.5 drop-shadow font-body">
-        <Sparkles className="w-3.5 h-3.5 text-[#ff9500]" />
-        <span>Tip: Drag cursor on glass to write on foggy window (खिड़की पर उंगली से लिखें)</span>
+      <div className="absolute bottom-3 left-4 text-[11px] text-neutral-400/90 pointer-events-none flex items-center gap-1.5 drop-shadow font-mono">
+        <Sparkles className="w-3.5 h-3.5 text-[#ff7b00]" />
+        <span>Tip: Drag finger or mouse on glass to write in the window mist</span>
       </div>
     </div>
   );

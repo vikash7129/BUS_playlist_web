@@ -46,11 +46,11 @@ export const HangingTalisman: React.FC<HangingTalismanProps> = ({ hornTriggered,
     setTimeout(() => setRotation(0), 600);
 
     const blessings = [
-      '🧿 बुरी नज़र वाले तेरा मुँह काला! (100% Protection Activated)',
-      '🌸 माँ का आशीर्वाद: सुरक्षित यात्रा, मंगलमय जीवन',
-      '🚎 ड्राइवर साहब का फरमान: खिड़की से हाथ बाहर न निकालें!',
-      '🌶️ नींबू-मिर्ची ने सड़क के सारे गड्ढों को न्यूट्रलाइज कर दिया!',
-      '✨ 90s कैसेट का जादू: रास्ता कितना भी लंबा हो, नींद नहीं आएगी!'
+      '🧿 EVIL EYE WARDED OFF: 100% Highway Protection Activated!',
+      "🌸 MOTHER'S BLESSING: Safe Journey & Smooth Highway Roads",
+      '🚎 DRIVER NOTICE: Please keep hands inside the window!',
+      '🌶️ LEMON-CHILI TALISMAN: Neutralized every pothole on the road!',
+      '✨ 90s CASSETTE MAGIC: No matter how long the highway, sleep won’t come!'
     ];
     const picked = blessings[Math.floor(Math.random() * blessings.length)];
     setBlessingMessage(picked);
@@ -73,7 +73,7 @@ export const HangingTalisman: React.FC<HangingTalismanProps> = ({ hornTriggered,
         transition={{ type: 'spring', stiffness: 120, damping: 10 }}
         onClick={handleTalismanClick}
         className="cursor-pointer group relative flex flex-col items-center origin-top transition-transform hover:scale-105"
-        title="Click the Nimbu-Mirchi Talisman for Nazar Suraksha!"
+        title="Click the Lemon-Chili Highway Talisman for Protection!"
       >
         {/* Top Evil Eye Bead */}
         <div className="w-5 h-5 rounded-full bg-blue-600 border-2 border-white flex items-center justify-center shadow-lg">
@@ -110,8 +110,8 @@ export const HangingTalisman: React.FC<HangingTalismanProps> = ({ hornTriggered,
         </svg>
 
         {/* Small Truck Art Badge below */}
-        <div className="mt-1 px-2 py-0.5 rounded bg-amber-500/90 text-neutral-950 font-bold text-[9px] tracking-tight font-hindi shadow-md border border-amber-300">
-          बुरी नज़र वाले 🧿
+        <div className="mt-1 px-2 py-0.5 rounded bg-[#ff7b00] text-neutral-950 font-bold text-[9px] tracking-tight font-mono shadow-md border border-amber-300">
+          PROTECTION TALISMAN 🧿
         </div>
       </motion.div>
 

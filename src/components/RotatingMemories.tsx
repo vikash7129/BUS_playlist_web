@@ -50,7 +50,7 @@ export const RotatingMemories: React.FC = () => {
       <div className="flex items-center justify-between gap-4 mb-3 pb-3 border-b border-white/10">
         <div className="flex items-center gap-2 text-xs font-mono text-[#ff9500] font-bold uppercase tracking-wider">
           <Quote className="w-4 h-4 text-[#ff7b00]" />
-          <span>यादों का सफर • Highway Nostalgia ({currentIndex + 1}/{NOSTALGIC_MEMORIES.length})</span>
+          <span>JOURNEY MEMORIES • Highway Nostalgia ({currentIndex + 1}/{NOSTALGIC_MEMORIES.length})</span>
         </div>
 
         {/* Next / Prev Controls */}
@@ -81,13 +81,13 @@ export const RotatingMemories: React.FC = () => {
           transition={{ duration: 0.4 }}
           className="space-y-3"
         >
-          {/* Hindi Title & Tag */}
+          {/* English Title & Tag */}
           <div className="flex flex-wrap items-center gap-2.5">
             <div className="p-2 rounded-xl bg-[#ff7b00]/20 text-[#ff9500] border border-[#ff7b00]/30 shadow-sm">
               <IconComponent className="w-4 h-4" />
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-white font-hindi tracking-wide">
-              {current.hindiTitle}
+            <h3 className="text-xl sm:text-2xl font-bold text-white font-serif tracking-tight">
+              {current.title}
             </h3>
             <span className="px-2.5 py-0.5 rounded-full bg-[#0a0f1a] text-[#ff9500] text-xs font-mono border border-white/10">
               {current.timeContext}
@@ -99,8 +99,8 @@ export const RotatingMemories: React.FC = () => {
             "{current.story}"
           </p>
 
-          <div className="text-xs text-neutral-400 font-body">
-            — {current.englishTranslation}
+          <div className="text-xs text-neutral-400 font-mono">
+            — {current.subtitle}
           </div>
         </motion.div>
       </AnimatePresence>

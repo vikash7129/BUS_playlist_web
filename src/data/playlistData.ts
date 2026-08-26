@@ -6,14 +6,14 @@ export const MAIN_YOUTUBE_ID = 'uIYFObB-yv0';
 export const PLAYLIST_TRACKS: SongTrack[] = [
   {
     id: 'track-main',
-    title: 'Bus Wale Bhaiya Ka Official Mixtape',
+    title: "Bus Driver's Official Highway Mixtape",
     movie: '90s Bollywood Night Bus Special',
     singers: 'Kumar Sanu, Alka Yagnik, Udit Narayan, Sonu Nigam',
     year: 1996,
     duration: 'Full Mixtape (1:12:45)',
     youtubeId: 'uIYFObB-yv0',
     vibe: 'Iconic 1:00 AM Highway Groove',
-    dialogue: '“Bhaiya, thoda volume aur badha do na!”'
+    dialogue: '"Driver sir, please turn the volume up a little more!"'
   },
   {
     id: 'track-1',
@@ -35,7 +35,7 @@ export const PLAYLIST_TRACKS: SongTrack[] = [
     duration: '6:15',
     youtubeId: 'k2qgadSvnyU',
     vibe: 'Rain on Bus Windshield',
-    dialogue: 'Droplets racing across the glass as wipers sway'
+    dialogue: 'Raindrops racing across the glass pane as wipers sway'
   },
   {
     id: 'track-3',
@@ -108,69 +108,67 @@ export const PLAYLIST_TRACKS: SongTrack[] = [
 export const NOSTALGIC_MEMORIES: NostalgicMemory[] = [
   {
     id: 'mem-1',
-    hindiTitle: 'खिड़की की ठंडी हवा और कुमार सानू का सुर',
-    englishTranslation: 'The cold window breeze and Kumar Sanu’s soulful voice',
-    story: 'Sitting by the rattling aluminum window with your head leaning against the glass. The cool midnight breeze smells of wet mud and highway eucalyptus, while 90s cassette melodies echo through the two front wooden speakers.',
-    tag: 'Window Seat Emotion',
+    title: 'Cold Window Breeze & Soulful 90s Melodies',
+    subtitle: 'The authentic window seat experience on late-night highway runs',
+    story: 'Sitting by the rattling aluminum window with your forehead resting against the cool glass. The midnight highway breeze carries the scent of damp earth and eucalyptus trees, while classic 90s cassette melodies echo warmly from the wooden front cabin speakers.',
+    tag: 'Window Seat Nostalgia',
     icon: 'Wind',
-    timeContext: '01:45 AM • NH 44'
+    timeContext: '01:45 AM • NH-44 Highway'
   },
   {
     id: 'mem-2',
-    hindiTitle: 'रात के ढाई बजे ढाबे की गरमा-गरम अदरक वाली चाय',
-    englishTranslation: 'Steaming ginger tea at a 2:30 AM highway dhaba stop',
-    story: 'The bus engine idles with a rhythmic chug-chug. Everyone walks half-asleep toward the glowing yellow tungsten bulbs of the dhaba. Hot kulhad chai, butter parathas on steel thalis, and the radio playing old Mukesh songs.',
-    tag: 'Dhaba Halt',
+    title: 'Steaming Ginger Chai at 2:30 AM Dhaba Halt',
+    subtitle: 'Midnight tea stop at Sher-E-Punjab roadside eatery',
+    story: 'The bus engine idles with a heavy rhythmic diesel hum. Passengers step out into the crisp mountain air toward glowing yellow tungsten lights. Freshly brewed ginger tea in terracotta kulhads and sizzling butter parathas on steel thalis.',
+    tag: 'Highway Dhaba Stop',
     icon: 'Coffee',
-    timeContext: '02:30 AM • Sher-E-Punjab Dhaba'
+    timeContext: '02:30 AM • Highway Dhaba Stop'
   },
   {
     id: 'mem-3',
-    hindiTitle: 'ड्राइवर भैया का मल्टी-टोन एयर हॉर्न',
-    englishTranslation: 'The driver’s legendary musical pneumatic air horn',
-    story: 'Two sharp taps on the steering horn button: "Poo-Poo-Peee-Poo!" A flash of high beams piercing the pitch-black highway mist, clearing the lane with unmatched swagger.',
-    tag: 'Highway Swagger',
+    title: 'The Driver’s Legendary Musical Air Horn',
+    subtitle: 'Pneumatic 4-tone melody piercing the midnight fog',
+    story: 'Two confident taps on the steering wheel air horn: "Poo-Poo-Peee-Poo!" High-beam halogen headlights flash through the thick highway mist, clearing the overtaking lane with unmatched highway swagger.',
+    tag: 'Highway Air Horn',
     icon: 'Volume2',
     timeContext: '03:15 AM • Karnal Bypass'
   },
   {
     id: 'mem-4',
-    hindiTitle: 'कंडक्टर की सीटी और लोहे की टिकट पंच मशीन',
-    englishTranslation: 'The conductor’s whistle and metal ticket punching click',
-    story: 'A sharp "Phweeeeet!" whistle echoing to signal the driver to move. The iconic click-clack of the aluminum ticket box with colored paper slips tucked neatly between fingers.',
-    tag: 'Bus Conductor Vibe',
+    title: 'Conductor’s Brass Whistle & Metal Ticket Puncher',
+    subtitle: 'The mechanical sounds of late-night boarding',
+    story: 'A sharp "Phweeee-phweeeet!" whistle signals the driver to roll out. The rhythmic metallic click of the conductor’s handheld puncher creates crisp perforated holes on thin souvenir paper tickets.',
+    tag: 'Conductor Whistle',
     icon: 'Ticket',
-    timeContext: 'Departing ISBT Terminal'
+    timeContext: 'Departing Terminal'
   },
   {
     id: 'mem-5',
-    hindiTitle: 'नींबू-मिर्ची, गेंदे के फूल और हनुमान चालीसा कैसेट',
-    englishTranslation: 'Lemon-chili talisman, marigold garland, and dashboard idol',
-    story: 'Swaying with every sudden brake and bump on the road. A little LED diya illuminating the dashboard idol, keeping the night journey safe across the ghats.',
-    tag: 'Buri Nazar Wale',
+    title: 'Marigold Garland & Dashboard Sacred Shrine',
+    subtitle: 'Illuminated dashboard idol watching over the night ride',
+    story: 'Swaying gently with every hairpin turn and road bump. A glowing tiny LED diya illuminates the sacred dashboard shrine with fresh marigold flowers, blessing the long journey across the mountain ghats.',
+    tag: 'Highway Blessing',
     icon: 'Shield',
-    timeContext: 'Hanging Rearview Mirror'
+    timeContext: 'Driver Cabin Shrine'
   },
   {
     id: 'mem-6',
-    hindiTitle: 'सुबह की पहली धूप और खिड़की पर ओस की बूँदें',
-    englishTranslation: 'First rays of morning light and condensation on the glass',
-    story: 'Waking up with a stiff neck to find the bus winding through mountain pine trees or green mustard fields. Drawing a smiley face on the foggy window glass as dawn breaks.',
+    title: 'First Golden Light & Condensation on Glass',
+    subtitle: 'Waking up to misty mountain pine valleys at dawn',
+    story: 'Waking up as the morning sun casts golden beams across the dashboard. Drawing smiling faces on the foggy condensation of the bus window while rolling into the mountain valleys.',
     tag: 'Dawn Awakening',
     icon: 'Sunrise',
-    timeContext: '05:30 AM • Ghat Entry'
+    timeContext: '05:30 AM • Mountain Valley'
   }
 ];
 
 export const TRUCK_ART_SLOGANS = [
   'HORN OK PLEASE',
-  'बुरी नज़र वाले तेरा मुँह काला',
-  'AWAAZ DE KAHA HAI',
-  'देखो मगर प्यार से',
-  'MAA KA AASHIRWAD',
-  'दम है तो क्रॉस कर, वरना बर्दाश्त कर',
-  'हँसो मत, पगली प्यार हो जाएगा',
-  'JAI BHOLE KI',
-  'SPEED 40 KMPH • PUSHPAK EXPRESS',
-  'रात की रानी • हाईवे किंग'
+  'KEEP DISTANCE • SOUND HORN BEFORE OVERTAKING',
+  'LOOK WITH RESPECT • DRIVE WITH CARE',
+  'MOTHER’S BLESSINGS (MAA KA AASHIRWAD)',
+  'OVERTAKE WITH SKILL • SAFETY FIRST',
+  'SPEED 40 KMPH • PUSHPAK HIGHWAY EXPRESS',
+  'QUEEN OF THE NIGHT • KING OF THE HIGHWAY',
+  'PEACE TO ALL TRAVELERS • JAI BHOLE'
 ];

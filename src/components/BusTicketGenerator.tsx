@@ -44,10 +44,10 @@ export const BusTicketGenerator: React.FC = () => {
         <div>
           <div className="flex items-center gap-2 text-xs font-mono text-[#ff9500] font-bold uppercase tracking-wider">
             <Ticket className="w-4 h-4 text-[#ff7b00]" />
-            <span>Souvenir Ticket Counter • यादगार बस टिकट</span>
+            <span>Souvenir Ticket Counter • Passenger Pass</span>
           </div>
-          <h3 className="text-xl font-bold text-white font-hindi mt-1">
-            अपनी नाइट बस का क्लासिक टिकट प्राप्त करें
+          <h3 className="text-xl font-bold text-white font-serif tracking-tight mt-1">
+            Generate Your Classic Midnight Highway Ticket
           </h3>
         </div>
 
@@ -63,7 +63,7 @@ export const BusTicketGenerator: React.FC = () => {
             }`}
           >
             <Scissors className="w-4 h-4" />
-            <span>{isPunched ? '✓ Ticket Punched!' : 'Punch Ticket (पंच करें)'}</span>
+            <span>{isPunched ? '✓ Ticket Punched!' : 'Punch Ticket ✂️'}</span>
           </button>
 
           <button
@@ -80,7 +80,7 @@ export const BusTicketGenerator: React.FC = () => {
         {/* Ticket Customizer Form */}
         <div className="space-y-4 bg-[#0a0f1a]/80 p-4 rounded-2xl border border-white/10">
           <div>
-            <label className="text-xs font-mono text-neutral-400 block mb-1">Passenger Name (यात्री का नाम)</label>
+            <label className="text-xs font-mono text-neutral-400 block mb-1">Passenger Name</label>
             <input
               type="text"
               value={passengerName}
@@ -91,7 +91,7 @@ export const BusTicketGenerator: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-xs font-mono text-neutral-400 block mb-1">Highway Route (रूट चुनें)</label>
+            <label className="text-xs font-mono text-neutral-400 block mb-1">Highway Route</label>
             <select
               value={routeIndex}
               onChange={(e) => {
@@ -109,7 +109,7 @@ export const BusTicketGenerator: React.FC = () => {
           </div>
 
           <div>
-            <label className="text-xs font-mono text-neutral-400 block mb-1">Seat Preference (सीट)</label>
+            <label className="text-xs font-mono text-neutral-400 block mb-1">Seat Preference</label>
             <select
               value={seatNumber}
               onChange={(e) => setSeatNumber(e.target.value)}
@@ -143,8 +143,8 @@ export const BusTicketGenerator: React.FC = () => {
             {/* Header / Transport Logo */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between border-b-2 border-dashed border-neutral-400 pb-3 gap-2">
               <div>
-                <div className="text-base sm:text-lg font-black text-neutral-950 tracking-tight font-hindi uppercase">
-                  उत्तर भारत राज्य परिवहन निगम • PUSHPAK SLEEPER
+                <div className="text-base sm:text-lg font-black text-neutral-950 tracking-tight uppercase font-mono">
+                  NORTH HIGHWAY STATE TRANSPORT • PUSHPAK SLEEPER
                 </div>
                 <div className="text-[11px] text-neutral-700 font-mono">
                   EXPRESS NIGHT SERVICE • LUXURY 2x2 AIR SUSPENSION
@@ -180,7 +180,7 @@ export const BusTicketGenerator: React.FC = () => {
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
               <div>
                 <div className="text-[10px] text-neutral-600 uppercase">Boarding Point ➔ Destination</div>
-                <div className="font-extrabold text-sm sm:text-base text-neutral-950 font-hindi">
+                <div className="font-extrabold text-sm sm:text-base text-neutral-950 font-mono">
                   {currentRoute.from} ➔ {currentRoute.to}
                 </div>
               </div>
@@ -193,8 +193,8 @@ export const BusTicketGenerator: React.FC = () => {
 
             {/* Bottom Rules / Slogan */}
             <div className="mt-4 pt-2 border-t border-neutral-300 text-[9px] text-neutral-600 flex flex-wrap justify-between items-center">
-              <span>* खिड़की से हाथ बाहर न निकालें • 90s के गानों का भरपूर आनंद लें</span>
-              <span className="font-bold text-neutral-800 font-hindi">शुभ यात्रा • BUS WALE KI PLAYLIST</span>
+              <span>* Keep hands inside the window • Enjoy the nostalgic 90s highway soundtrack</span>
+              <span className="font-bold text-neutral-800 font-mono">HAPPY JOURNEY • BUS WALE KI PLAYLIST</span>
             </div>
           </div>
         </div>

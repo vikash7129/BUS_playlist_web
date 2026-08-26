@@ -21,7 +21,26 @@ class BusAudioEngine {
     this.initContext();
   }
 
-  // Iconic Indian 4-Stage Multi-Tone Musical Air Horn ("Poo-Poo-Peee-Poo!")
+  // Master method to play any Highway Bus Horn style
+  public playHorn(style: 'musical' | 'heavy' | 'fanfare' | 'staccato' = 'musical') {
+    switch (style) {
+      case 'heavy':
+        this.playHeavyHighwayBlast();
+        break;
+      case 'fanfare':
+        this.playMelodyFanfareHorn();
+        break;
+      case 'staccato':
+        this.playStaccatoHorn();
+        break;
+      case 'musical':
+      default:
+        this.playMusicalAirHorn();
+        break;
+    }
+  }
+
+  // 1. Iconic Indian 4-Stage Multi-Tone Musical Air Horn ("Poo-Poo-Peee-Poo!")
   public playMusicalAirHorn() {
     this.initContext();
     if (!this.ctx) return;
@@ -29,49 +48,38 @@ class BusAudioEngine {
     const ctx = this.ctx;
     const now = ctx.currentTime;
 
-    // A classic pneumatic truck horn sequence with brassy harmonic rich frequencies
-    // Stage 1: 440Hz & 554Hz (A4 + C#5) -> 0.18s
-    // Stage 2: 494Hz & 622Hz (B4 + D#5) -> 0.18s
-    // Stage 3: 587Hz & 740Hz (D5 + F#5) -> 0.28s
-    // Stage 4: 659Hz & 830Hz (E5 + G#5) -> 0.45s sustained
-
     const notes = [
       { f1: 349.23, f2: 440.0, f3: 523.25, dur: 0.16, delay: 0 },
       { f1: 392.00, f2: 493.88, f3: 587.33, dur: 0.16, delay: 0.17 },
       { f1: 440.00, f2: 554.37, f3: 659.25, dur: 0.22, delay: 0.34 },
-      { f1: 523.25, f2: 659.25, f3: 783.99, dur: 0.55, delay: 0.57 }
+      { f1: 523.25, f2: 659.25, f3: 783.99, dur: 0.6, delay: 0.57 }
     ];
 
     notes.forEach(note => {
       const startTime = now + note.delay;
       const stopTime = startTime + note.dur;
 
-      // Create master gain for this pulse with air-pressure rise and release
       const noteGain = ctx.createGain();
       noteGain.gain.setValueAtTime(0.001, startTime);
-      noteGain.gain.exponentialRampToValueAtTime(0.4, startTime + 0.03);
-      noteGain.gain.setValueAtTime(0.4, stopTime - 0.04);
+      noteGain.gain.exponentialRampToValueAtTime(0.48, startTime + 0.03);
+      noteGain.gain.setValueAtTime(0.48, stopTime - 0.04);
       noteGain.gain.exponentialRampToValueAtTime(0.001, stopTime);
 
-      // Lowpass filter to simulate acoustic metal horn bell resonance
       const filter = ctx.createBiquadFilter();
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(2200, startTime);
+      filter.frequency.setValueAtTime(2400, startTime);
       filter.Q.setValueAtTime(4.0, startTime);
 
-      // 3 Rich Sawtooth and Square Oscillators for deep metallic brassy horn sound
       const freqs = [note.f1, note.f2, note.f3];
       freqs.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         osc.type = idx === 0 ? 'sawtooth' : (idx === 1 ? 'square' : 'sawtooth');
-        // Slight detuning for pneumatic richness
         osc.frequency.setValueAtTime(freq + (idx === 1 ? 1.5 : -1.5), startTime);
 
-        // Subtle vibrato (pressure wobble)
         const lfo = ctx.createOscillator();
         const lfoGain = ctx.createGain();
-        lfo.frequency.value = 12;
-        lfoGain.gain.value = 4;
+        lfo.frequency.value = 14;
+        lfoGain.gain.value = 5;
         lfo.connect(osc.frequency);
         lfo.start(startTime);
         lfo.stop(stopTime);
@@ -81,8 +89,8 @@ class BusAudioEngine {
         osc.stop(stopTime);
       });
 
-      // Air rush noise generator for pneumatic hiss
-      const bufferSize = ctx.sampleRate * note.dur;
+      // Pneumatic air rush hiss
+      const bufferSize = Math.floor(ctx.sampleRate * note.dur);
       const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
       const data = buffer.getChannelData(0);
       for (let i = 0; i < bufferSize; i++) {
@@ -92,11 +100,11 @@ class BusAudioEngine {
       noise.buffer = buffer;
       const noiseFilter = ctx.createBiquadFilter();
       noiseFilter.type = 'bandpass';
-      noiseFilter.frequency.value = 1800;
+      noiseFilter.frequency.value = 1900;
       noiseFilter.Q.value = 2.0;
 
       const noiseGain = ctx.createGain();
-      noiseGain.gain.setValueAtTime(0.08, startTime);
+      noiseGain.gain.setValueAtTime(0.09, startTime);
       noiseGain.gain.exponentialRampToValueAtTime(0.001, stopTime);
 
       noise.connect(noiseFilter);
@@ -104,6 +112,162 @@ class BusAudioEngine {
       noiseGain.connect(filter);
       noise.start(startTime);
       noise.stop(stopTime);
+
+      noteGain.connect(filter);
+      filter.connect(ctx.destination);
+    });
+  }
+
+  // 2. Heavy Dual-Trumpet Pneumatic Highway Truck Blast ("HOOOONNKK!")
+  public playHeavyHighwayBlast() {
+    this.initContext();
+    if (!this.ctx) return;
+
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+    const duration = 0.75;
+    const stopTime = now + duration;
+
+    const gain = ctx.createGain();
+    gain.gain.setValueAtTime(0.001, now);
+    gain.gain.exponentialRampToValueAtTime(0.55, now + 0.04);
+    gain.gain.setValueAtTime(0.52, stopTime - 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.001, stopTime);
+
+    const filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(1800, now);
+    filter.Q.setValueAtTime(3.5, now);
+
+    // Deep dissonant chord typical of heavy freight & interstate sleeper coaches (E3 + G#3 + B3 + D4)
+    const baseFreqs = [164.81, 207.65, 246.94, 293.66];
+    baseFreqs.forEach((freq, idx) => {
+      const osc = ctx.createOscillator();
+      osc.type = idx % 2 === 0 ? 'sawtooth' : 'square';
+      osc.frequency.setValueAtTime(freq, now);
+
+      const lfo = ctx.createOscillator();
+      const lfoGain = ctx.createGain();
+      lfo.frequency.value = 10;
+      lfoGain.gain.value = 3.5;
+      lfo.connect(osc.frequency);
+      lfo.start(now);
+      lfo.stop(stopTime);
+
+      osc.connect(gain);
+      osc.start(now);
+      osc.stop(stopTime);
+    });
+
+    // Heavy air exhaust rush
+    const bufferSize = Math.floor(ctx.sampleRate * duration);
+    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < bufferSize; i++) {
+      data[i] = Math.random() * 2 - 1;
+    }
+    const noise = ctx.createBufferSource();
+    noise.buffer = buffer;
+    const noiseFilter = ctx.createBiquadFilter();
+    noiseFilter.type = 'bandpass';
+    noiseFilter.frequency.value = 1200;
+    noiseFilter.Q.value = 1.5;
+
+    const noiseGain = ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.12, now);
+    noiseGain.gain.exponentialRampToValueAtTime(0.001, stopTime);
+
+    noise.connect(noiseFilter);
+    noiseFilter.connect(noiseGain);
+    noiseGain.connect(filter);
+    noise.start(now);
+    noise.stop(stopTime);
+
+    gain.connect(filter);
+    filter.connect(ctx.destination);
+  }
+
+  // 3. Fast Overtaking Fanfare Melody ("Poo-Pi-Poo-Peee-Pooo!")
+  public playMelodyFanfareHorn() {
+    this.initContext();
+    if (!this.ctx) return;
+
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+
+    const sequence = [
+      { f: [440, 554], dur: 0.12, delay: 0 },
+      { f: [494, 622], dur: 0.12, delay: 0.13 },
+      { f: [554, 698], dur: 0.12, delay: 0.26 },
+      { f: [440, 554], dur: 0.14, delay: 0.39 },
+      { f: [659, 830], dur: 0.45, delay: 0.54 }
+    ];
+
+    sequence.forEach(step => {
+      const startTime = now + step.delay;
+      const stopTime = startTime + step.dur;
+
+      const noteGain = ctx.createGain();
+      noteGain.gain.setValueAtTime(0.001, startTime);
+      noteGain.gain.exponentialRampToValueAtTime(0.45, startTime + 0.02);
+      noteGain.gain.setValueAtTime(0.42, stopTime - 0.03);
+      noteGain.gain.exponentialRampToValueAtTime(0.001, stopTime);
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(2600, startTime);
+      filter.Q.setValueAtTime(3.0, startTime);
+
+      step.f.forEach(freq => {
+        const osc = ctx.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, startTime);
+        osc.connect(noteGain);
+        osc.start(startTime);
+        osc.stop(stopTime);
+      });
+
+      noteGain.connect(filter);
+      filter.connect(ctx.destination);
+    });
+  }
+
+  // 4. Double Rapid Staccato Blast ("Paap-Paap!")
+  public playStaccatoHorn() {
+    this.initContext();
+    if (!this.ctx) return;
+
+    const ctx = this.ctx;
+    const now = ctx.currentTime;
+
+    const bursts = [
+      { delay: 0, dur: 0.13 },
+      { delay: 0.17, dur: 0.22 }
+    ];
+
+    bursts.forEach(burst => {
+      const startTime = now + burst.delay;
+      const stopTime = startTime + burst.dur;
+
+      const noteGain = ctx.createGain();
+      noteGain.gain.setValueAtTime(0.001, startTime);
+      noteGain.gain.exponentialRampToValueAtTime(0.5, startTime + 0.02);
+      noteGain.gain.setValueAtTime(0.48, stopTime - 0.03);
+      noteGain.gain.exponentialRampToValueAtTime(0.001, stopTime);
+
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(2000, startTime);
+      filter.Q.setValueAtTime(3.0, startTime);
+
+      [392, 493.88, 587.33].forEach(freq => {
+        const osc = ctx.createOscillator();
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(freq, startTime);
+        osc.connect(noteGain);
+        osc.start(startTime);
+        osc.stop(stopTime);
+      });
 
       noteGain.connect(filter);
       filter.connect(ctx.destination);
