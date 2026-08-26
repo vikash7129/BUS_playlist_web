@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .font-hindi {
+    font-family: 'Yatra One', cursive;
+  }
+  .font-display {
+    font-family: 'Playfair Display', 'Teko', serif;
+  }
+  .font-serif {
+    font-family: 'Playfair Display', Georgia, serif;
+  }
+  .font-baskerville {
+    font-family: 'Libre Baskerville', Georgia, serif;
+  }
+  .font-devanagari {
+    font-family: 'Rozha One', serif;
+  }
+  .font-hand {
+    font-family: 'Caveat', cursive;
+  }
+  .font-mono {
+    font-family: 'Space Mono', 'Rajdhani', monospace;
+  }
+  .font-body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+
+  /* Artistic Flair Glass & Lighting */
+  .glass-artistic {
+    background: rgba(14, 22, 38, 0.78);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-artistic-card {
+    background: linear-gradient(135deg, rgba(20, 30, 51, 0.85) 0%, rgba(10, 15, 26, 0.92) 100%);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 123, 0, 0.18);
+  }
+
+  .glow-orange {
+    box-shadow: 0 0 30px rgba(255, 123, 0, 0.22);
+  }
+
+  .glow-orange-subtle {
+    box-shadow: 0 0 15px rgba(255, 123, 0, 0.12);
+  }
+
+  .text-glow-orange {
+    text-shadow: 0 0 12px rgba(255, 123, 0, 0.6);
+  }
+}
+
+/* Custom Scrollbar for Retro Deck */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0f1a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ff7b00;
+}
+
+@keyframes subtle-vibrate {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-1px, 1px); }
+  50% { transform: translate(1px, -1px); }
+  75% { transform: translate(-1px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+.bus-vibrate {
+  animation: subtle-vibrate 0.12s infinite linear;
+}
